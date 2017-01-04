@@ -8,7 +8,7 @@ module.exports = {
 
             request(parameters, function(err, response, body){
                 if(err){
-                    reject(formatResponse(response));
+                    reject(formatError(err));
                 } else {
                     resolve(formatResponse(response));
                 }
@@ -17,6 +17,13 @@ module.exports = {
     }
 };
 
+
+function formatError(error, response) {
+    return {
+        error: error,
+        response: response,
+    };
+}
 
 function formatResponse(response){
     return {
