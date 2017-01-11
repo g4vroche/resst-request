@@ -2,15 +2,15 @@ var request = require("request");
 
 module.exports = {
 
-    "handle": function(parameters){
+    "handle": function(parameters, assigner){
 
         return new Promise(function(resolve, reject){
 
             request(parameters, function(err, response, body){
                 if(err){
-                    reject(formatError(err));
+                    reject(assigner(formatError(err)));
                 } else {
-                    resolve(formatResponse(response));
+                    resolve(assigner(formatResponse(response)));
                 }
             });
         });
