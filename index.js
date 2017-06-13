@@ -2,15 +2,15 @@ var request = require("request");
 
 module.exports = {
 
-    "handle": function(parameters, assigner){
+    "handle": function(parameters){
 
         return new Promise(function(resolve, reject){
 
             request(parameters, function(err, response, body){
                 if(err){
-                    reject(assigner(formatError(err)));
+                    reject(formatError(err));
                 } else {
-                    resolve(assigner(formatResponse(response)));
+                    resolve(formatResponse(response));
                 }
             });
         });
@@ -42,4 +42,3 @@ function formatBody(response){
         return JSON.parse(response.body);
     }
 }
-
